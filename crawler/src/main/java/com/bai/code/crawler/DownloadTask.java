@@ -24,13 +24,13 @@ public class DownloadTask implements Runnable {
 		Response res = null;
 		try {
 			res = Jsoup.connect(src).ignoreContentType(true).timeout(30000).execute();
-				byte[] bytes = res.bodyAsBytes();
-				File file = new File(path + name);
-				if(!file.exists()) {
-					RandomAccessFile raf= new RandomAccessFile(file, "rw");	
-					raf.write(bytes);
-					raf.close();
-				}
+			byte[] bytes = res.bodyAsBytes();
+			File file = new File(path + name);
+			if (!file.exists()) {
+				RandomAccessFile raf = new RandomAccessFile(file, "rw");
+				raf.write(bytes);
+				raf.close();
+			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

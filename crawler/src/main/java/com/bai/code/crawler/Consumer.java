@@ -33,11 +33,9 @@ public class Consumer implements Runnable {
 				taskPool.submit(new DownloadTask(src));
 			}
 			System.out.println(name + " is over");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		} 
 	}
 
 }

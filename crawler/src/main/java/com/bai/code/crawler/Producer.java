@@ -22,24 +22,31 @@ public class Producer implements Runnable {
 	public void run() {
 		Document doc = null;
 		try {
-			doc = Jsoup.connect("https://alpha.wallhaven.cc/latest").get();
-			Element div = doc.getElementById("thumbs");
-			Elements sections = div.getElementsByTag("section");
-			for (Element ele : sections) {
-				Elements links = ele.getElementsByClass("preview");
-				for (Element e : links) {
-					String href = e.attr("href");
-					System.out.println(name + " put " + href);
-					blockingQueue.put(href);
+			for(int i = 1; i < 12018; i ++) {
+				System.out.println();
+				System.out.println();
+				System.out.println("current page:" + i);
+				System.out.println("-----------------------------------");
+				if(i == 1) {
+					doc = Jsoup.connect("https://alpha.wallhaven.cc/latest").get();
+				} else {
+					doc = Jsoup.connect("https://alpha.wallhaven.cc/latest?page=" + i).get();
+				}
+				Element div = doc.getElementById("thumbs");
+				Elements sections = div.getElementsByTag("section");
+				for (Element ele : sections) {
+					Elements links = ele.getElementsByClass("preview");
+					for (Element e : links) {
+						String href = e.attr("href");
+						blockingQueue.put(href);
+						System.out.println(name + " put " + href);
+					}
 				}
 			}
 			blockingQueue.put("");
 			System.out.println(name + " is over");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		} 
 	}
-
 }
