@@ -23,7 +23,7 @@ public class DownloadTask implements Runnable {
 	public void run() {
 		Response res = null;
 		try {
-			res = Jsoup.connect(src).ignoreContentType(true).timeout(30000).execute();
+			res = Jsoup.connect(src).ignoreContentType(true).timeout(60000).maxBodySize(0).execute();
 			byte[] bytes = res.bodyAsBytes();
 			File file = new File(path + name);
 			if (!file.exists()) {
