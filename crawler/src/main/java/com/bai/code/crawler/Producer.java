@@ -23,6 +23,7 @@ public class Producer implements Runnable {
 		Document doc = null;
 		try {
 			for(int i = 1; i < 12018; i ++) {
+
 				System.out.println();
 				System.out.println();
 				System.out.println("current page:" + i);
