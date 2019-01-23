@@ -10,7 +10,7 @@ public class DownloadTaskExecutor {
 
 	public static void main(String[] args) throws IOException {
 		
-		ResourceListener.addListener("C:\\Users\\baiyapeng\\Desktop\\Paper\\");
+		ResourceListener.addListener("F://wallhaven");
 	
 		BlockingQueue<String> blockingQueue = new SynchronousQueue<String>(true);
         ExecutorService proservice = Executors.newSingleThreadExecutor();

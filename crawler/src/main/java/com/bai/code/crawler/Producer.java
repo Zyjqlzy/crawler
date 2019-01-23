@@ -1,12 +1,12 @@
 package com.bai.code.crawler;
 
-import java.io.IOException;
-import java.util.concurrent.BlockingQueue;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.concurrent.BlockingQueue;
 
 public class Producer implements Runnable {
 
@@ -28,9 +28,11 @@ public class Producer implements Runnable {
 				System.out.println("current page:" + i);
 				System.out.println("-----------------------------------");
 				if(i == 1) {
-					doc = Jsoup.connect("https://alpha.wallhaven.cc/latest").get();
+
+					doc = Jsoup.connect("https://alpha.wallhaven.cc/search?q=&categories=111&purity=110&sorting=date_added&order=desc&").header("user-agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36").timeout(500000).get();
+
 				} else {
-					doc = Jsoup.connect("https://alpha.wallhaven.cc/latest?page=" + i).get();
+					doc = Jsoup.connect("https://alpha.wallhaven.cc/search?q=&categories=111&purity=110&sorting=date_added&order=desc&page=" + i).header("user-agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36").timeout(5000000).get();
 				}
 				Element div = doc.getElementById("thumbs");
 				Elements sections = div.getElementsByTag("section");

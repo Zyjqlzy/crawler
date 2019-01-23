@@ -1,12 +1,12 @@
 package com.bai.code.crawler;
 
-import java.io.IOException;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
+import java.io.IOException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
 
 public class Consumer implements Runnable {
 
@@ -27,7 +27,7 @@ public class Consumer implements Runnable {
 			String href = null;
 			while((href = blockingQueue.take()) != "") {
 				System.out.println(name + " take " + href);
-				doc = Jsoup.connect(href).get();
+				doc = Jsoup.connect(href).header("user-agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36").timeout(500000).get();
 				Element img = doc.getElementById("wallpaper");
 				String src = "https:" + img.attr("src");
 				taskPool.submit(new DownloadTask(src));
